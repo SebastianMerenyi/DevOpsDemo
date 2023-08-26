@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+ mysql-git:
+  image: mysql:5.6
+  container_name: sm-mysql
+  environment:
+   MYSQL_DATABASE: utec_db
+   MYSQL_USER: utec
+   MYSQL_PASSWORD: 2023.uTEC
+   MYSQL_ROOT_PASSWORD: uTEC.2023
+  ports:
+   - "3306:3306"
+  restart: always
+
+ web-git:
+  image: php:7.3-apache
+  container_name: sm-apache
+  ports:
+   - "9000:80"
+  volumes:
+   - ./www:/var/www/html
+  links:
+   - mysql-git
